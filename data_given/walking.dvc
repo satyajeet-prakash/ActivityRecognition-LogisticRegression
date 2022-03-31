@@ -1,0 +1,5 @@
+outs:
+- md5: d31707db3f001689c27a8d88b412739a.dir
+  size: 283590
+  nfiles: 15
+  path: walking

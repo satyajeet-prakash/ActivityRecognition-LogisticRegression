@@ -23,7 +23,7 @@ dvc init
 
 dvc add data_given/*/*.csv
 
-git add . && git commit -m "first commit"
+git add . && git commit -m "initial commit"
 
 git remote add origin git@github.com:satyajeet-prakash/ActivityRecognition-LogisticRegression.git
 

@@ -1,4 +1,3 @@
-import os
 import yaml
 import argparse
 import pandas as pd
@@ -12,6 +11,9 @@ def read_params(config_path):
 
 def get_data(config_path):
     config = read_params(config_path)
+    data_path = config["data_source"]["comb_source"]
+    df = pd.read_csv(data_path, sep=",", encoding='utf')
+    return df
 
 
 if __name__ == '__main__':
