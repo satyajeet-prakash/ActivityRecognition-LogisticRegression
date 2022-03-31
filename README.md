@@ -15,3 +15,20 @@ Install the requirements
 ```bash
 pip install -r requirements.txt
 ```
+
+```bash
+git init
+
+dvc init
+
+dvc add data_given/*/*.csv
+
+git add . && git commit -m "first commit"
+
+git remote add origin git@github.com:satyajeet-prakash/ActivityRecognition-LogisticRegression.git
+
+git branch -M main
+ 
+git push -u origin main
+
+```
