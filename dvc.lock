@@ -26,3 +26,19 @@ stages:
     - path: data/raw/combined_AReM_data.csv
       md5: 215a61be637dd9617991947eff48cb29
       size: 1826718
+  split_data:
+    cmd: python src/split_data.py --config=params.yaml
+    deps:
+    - path: data/raw/combined_AReM_data.csv
+      md5: 215a61be637dd9617991947eff48cb29
+      size: 1826718
+    - path: src/get_data.py
+      md5: 597d1e62138faee6d806e2a3a6763ce7
+      size: 584
+    outs:
+    - path: data/processed/test_AReM_data.csv
+      md5: 806dc14b49876ff380de36b16bdefc49
+      size: 365524
+    - path: data/processed/train_AReM_data.csv
+      md5: 8ee245cf2b9d39679406ed867b6b0c16
+      size: 1461271
