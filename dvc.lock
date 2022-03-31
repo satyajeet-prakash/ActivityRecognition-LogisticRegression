@@ -1,0 +1,12 @@
+schema: '2.0'
+stages:
+  combine_data:
+    cmd: python src/combine_data.py --config=params.yaml
+    deps:
+    - path: src/combine_data.py
+      md5: 52a7eb00559f4c104337413ce99da8f4
+      size: 1138
+    outs:
+    - path: data/combined/combined_AReM_data.csv
+      md5: c271ab65f2f7ff901eb7fedcf99b396d
+      size: 1826708

@@ -1,0 +1,7 @@
+stages:
+  combine_data:
+    cmd: python src/combine_data.py --config=params.yaml
+    deps:
+    - src/combine_data.py
+    outs:
+    - data/combined/combined_AReM_data.csv

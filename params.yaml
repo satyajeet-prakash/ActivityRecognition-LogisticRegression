@@ -1,0 +1,35 @@
+base:
+  project: activity-recognition
+  random_state: 42
+  target_col: LABEL
+
+data_source:
+  s3_source: data_given
+  comb_source: data/combined/combined_AReM_data.csv
+  dirs_list:
+    [
+      "bending1",
+      "bending2",
+      "cycling",
+      "lying",
+      "sitting",
+      "standing",
+      "walking",
+    ]
+
+load_data:
+  raw_dataset_csv: data/raw/combined_AReM_data.csv
+
+split_data:
+  train_path: data/processed/train_AReM_data.csv
+  test_path: data/processed/test_AReM_data.csv
+  test_size: 0.2
+
+model_dir: saved_models
+
+reports:
+  params: report/params.json
+  scores: report/scores.json
+
+# model path change for flask app
+webapp_model_dir: prediction_service/model/model.joblib
