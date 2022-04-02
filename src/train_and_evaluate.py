@@ -61,10 +61,10 @@ def train_and_evaluate(config_path):
 
     with open(scores_file, "w") as f:
         scores = {
-            "accuracy_score": score_accuracy,
-            "precision_score": score_precision,
-            "recall_score": score_recall,
-            "f1_score": score_f1
+            "accuracy_score": '{:.2f}'.format(score_accuracy),
+            "precision_score": '{:.2f}'.format(score_precision),
+            "recall_score":  '{:.2f}'.format(score_recall),
+            "f1_score":  '{:.2f}'.format(score_f1)
         }
         json.dump(scores, f, indent=4)
 

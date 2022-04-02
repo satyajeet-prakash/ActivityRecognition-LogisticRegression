@@ -52,8 +52,8 @@ stages:
       md5: 65d711c5bf16d68baabdad0fe07bf613
       size: 1324245
     - path: src/train_and_evaluate.py
-      md5: 1410a1e71c174508e0c2931694f7515d
-      size: 2721
+      md5: 9bafe51437d43f8f66be552e16cf9c0b
+      size: 2791
     params:
       params.yaml:
         algorithm_params.solver: lbfgs
@@ -62,8 +62,8 @@ stages:
       md5: 781f58cb383f63293a5da011d23cba4c
       size: 25
     - path: report/scores.json
-      md5: 5e1b064e43004b0ded796d40642b0cfc
-      size: 121
+      md5: e9e350347f7de1d95a81a65754ee3908
+      size: 115
     - path: saved_models/model.joblib
       md5: a5e700631512eac13b64856d04d10819
       size: 1868
