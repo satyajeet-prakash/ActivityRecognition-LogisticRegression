@@ -60,12 +60,11 @@ def dataset_outliers(df):
 def load_and_save(config_path):
     config = read_params(config_path)
     df = get_data(config_path)
-    new_cols = [col.replace(" ", "_") for col in df.columns]
     df = missing_values(df)
     df = zeros_values(df)
     df = dataset_outliers(df)
     raw_data_path = config["load_data"]["raw_dataset_csv"]
-    df.to_csv(raw_data_path, sep=",", index=False, header=new_cols)
+    df.to_csv(raw_data_path, sep=",", index=False)
 
 
 if __name__ == '__main__':

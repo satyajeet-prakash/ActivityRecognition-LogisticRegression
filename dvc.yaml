@@ -13,13 +13,13 @@ stages:
       - src/get_data.py
       - data/combined/combined_AReM_data.csv
     outs:
-      - data/raw/combined_AReM_data.csv
+      - data/raw/raw_AReM_data.csv
 
   split_data:
     cmd: python src/split_data.py --config=params.yaml
     deps:
       - src/get_data.py
-      - data/raw/combined_AReM_data.csv
+      - data/raw/raw_AReM_data.csv
     outs:
       - data/processed/train_AReM_data.csv
       - data/processed/test_AReM_data.csv

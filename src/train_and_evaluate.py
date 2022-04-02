@@ -1,8 +1,5 @@
 import os
-from tabnanny import verbose
-import yaml
 import pandas as pd
-import numpy as np
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.linear_model import LogisticRegression
 from get_data import read_params

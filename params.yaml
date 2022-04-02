@@ -18,7 +18,7 @@ data_source:
     ]
 
 load_data:
-  raw_dataset_csv: data/raw/combined_AReM_data.csv
+  raw_dataset_csv: data/raw/raw_AReM_data.csv
 
 split_data:
   train_path: data/processed/train_AReM_data.csv
