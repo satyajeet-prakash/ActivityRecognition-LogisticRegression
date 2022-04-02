@@ -25,6 +25,10 @@ split_data:
   test_path: data/processed/test_AReM_data.csv
   test_size: 0.2
 
+algorithm_params:
+  solver: lbfgs
+  average: micro
+
 model_dir: saved_models
 
 reports:

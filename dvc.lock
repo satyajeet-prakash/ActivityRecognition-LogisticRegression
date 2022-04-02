@@ -20,25 +20,50 @@ stages:
       md5: 597d1e62138faee6d806e2a3a6763ce7
       size: 584
     - path: src/load_data.py
-      md5: e1fe1e432c8525193e7923fada5b5c0f
-      size: 559
+      md5: f90addba80323d8f7be7ad5b4224d6b2
+      size: 2170
     outs:
     - path: data/raw/combined_AReM_data.csv
-      md5: 215a61be637dd9617991947eff48cb29
-      size: 1826718
+      md5: 846d6aebd23b3bd03e77cddbdafce2f7
+      size: 1657625
   split_data:
     cmd: python src/split_data.py --config=params.yaml
     deps:
     - path: data/raw/combined_AReM_data.csv
-      md5: 215a61be637dd9617991947eff48cb29
-      size: 1826718
+      md5: 846d6aebd23b3bd03e77cddbdafce2f7
+      size: 1657625
     - path: src/get_data.py
       md5: 597d1e62138faee6d806e2a3a6763ce7
       size: 584
     outs:
     - path: data/processed/test_AReM_data.csv
-      md5: 806dc14b49876ff380de36b16bdefc49
-      size: 365524
+      md5: d221fc8d05c021a00b25c37a2ca78816
+      size: 333457
     - path: data/processed/train_AReM_data.csv
-      md5: 8ee245cf2b9d39679406ed867b6b0c16
-      size: 1461271
+      md5: 65d711c5bf16d68baabdad0fe07bf613
+      size: 1324245
+  train_and_evaluate:
+    cmd: python src/train_and_evaluate.py --config=params.yaml
+    deps:
+    - path: data/processed/test_AReM_data.csv
+      md5: d221fc8d05c021a00b25c37a2ca78816
+      size: 333457
+    - path: data/processed/train_AReM_data.csv
+      md5: 65d711c5bf16d68baabdad0fe07bf613
+      size: 1324245
+    - path: src/train_and_evaluate.py
+      md5: 1410a1e71c174508e0c2931694f7515d
+      size: 2721
+    params:
+      params.yaml:
+        algorithm_params.solver: lbfgs
+    outs:
+    - path: report/params.json
+      md5: 781f58cb383f63293a5da011d23cba4c
+      size: 25
+    - path: report/scores.json
+      md5: 5e1b064e43004b0ded796d40642b0cfc
+      size: 121
+    - path: saved_models/model.joblib
+      md5: a5e700631512eac13b64856d04d10819
+      size: 1868
