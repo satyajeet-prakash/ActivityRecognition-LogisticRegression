@@ -59,3 +59,10 @@ build your own package commands -
 ```bash
 python setup.py sdist bdist_wheel
 ```
+
+min-max for NOT IN RANGE
+```bash
+overview = df.describe()
+overview.loc[["min", "max"]]
+overview.loc[["min", "max"]].to_json("schema_in.json")
+```
