@@ -66,3 +66,14 @@ overview = df.describe()
 overview.loc[["min", "max"]]
 overview.loc[["min", "max"]].to_json("schema_in.json")
 ```
+
+create an artifacts folder 
+
+
+mlflow server command - 
+```bash
+mlflow server \
+    --backend-store-uri sqlite:///mlflow.db \
+    --default-artifact-root ./artifacts \
+    --host 0.0.0.0 -p 2345
+```

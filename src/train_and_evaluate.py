@@ -1,11 +1,10 @@
-import os
 import pandas as pd
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from sklearn.linear_model import LogisticRegression
 from get_data import read_params
+from urllib.parse import urlparse
 import argparse
-import joblib
-import json
+import mlflow
 
 
 def eval_metrics(actual, pred, average):
@@ -37,44 +36,41 @@ def train_and_evaluate(config_path):
     train_x = train.drop(columns=target, axis=1)
     test_x = test.drop(columns=target, axis=1)
 
-    logr = LogisticRegression(
-        solver=solver,
-        random_state=random_state
-    )
-    logr.fit(train_x, train_y)
+    mlflow_config = config["mlflow_config"]
+    remote_server_uri = mlflow_config["remote_server_uri"]
 
-    predicted_qualities = logr.predict(test_x)
-    (score_accuracy, score_precision, score_recall,
-     score_f1) = eval_metrics(test_y, predicted_qualities, average)
+    mlflow.set_tracking_uri(remote_server_uri)
 
-    print("LogisticRegression model (solver=%s):" % (solver))
-    print("  Accuracy Score: %s" % score_accuracy)
-    print("  Precision Score: %s" % score_precision)
-    print("  Recall Score: %s" % score_recall)
-    print("  F1 Score: %s" % score_f1)
+    mlflow.set_experiment(mlflow_config["experiment_name"])
 
-    scores_file = config["reports"]["scores"]
-    params_file = config["reports"]["params"]
+    with mlflow.start_run(run_name=mlflow_config["run_name"]) as mlops_run:
+        logr = LogisticRegression(
+            solver=solver,
+            random_state=random_state
+        )
+        logr.fit(train_x, train_y)
 
-    with open(scores_file, "w") as f:
-        scores = {
-            "accuracy_score": '{:.2f}'.format(score_accuracy),
-            "precision_score": '{:.2f}'.format(score_precision),
-            "recall_score":  '{:.2f}'.format(score_recall),
-            "f1_score":  '{:.2f}'.format(score_f1)
-        }
-        json.dump(scores, f, indent=4)
+        predicted_qualities = logr.predict(test_x)
+        (score_accuracy, score_precision, score_recall,
+         score_f1) = eval_metrics(test_y, predicted_qualities, average)
 
-    with open(params_file, "w") as f:
-        params = {
-            "solver": solver
-        }
-        json.dump(params, f, indent=4)
+        mlflow.log_param("solver", solver)
+        mlflow.log_param("average", average)
 
-    os.makedirs(model_dir, exist_ok=True)
-    model_path = os.path.join(model_dir, "model.joblib")
+        mlflow.log_metric("accuracy", score_accuracy)
+        mlflow.log_metric("precision", score_precision)
+        mlflow.log_metric("recall", score_recall)
+        mlflow.log_metric("f1", score_f1)
 
-    joblib.dump(logr, model_path)
+        tracking_url_type_store = urlparse(mlflow.get_artifact_uri()).scheme
+
+        if tracking_url_type_store != "file":
+            mlflow.sklearn.log_model(
+                logr,
+                "model",
+                registered_model_name=mlflow_config["registered_model_name"])
+        else:
+            mlflow.sklearn.load_model(logr, "model")
 
 
 if __name__ == '__main__':

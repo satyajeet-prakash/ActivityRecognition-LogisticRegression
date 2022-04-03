@@ -11,3 +11,4 @@ pytest
 tox
 flake8
 gunicorn
+mlflow

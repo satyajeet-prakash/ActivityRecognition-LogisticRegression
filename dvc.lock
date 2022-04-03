@@ -52,18 +52,14 @@ stages:
       md5: 5f7290de2d65a47b0eff3e1c46eb55ff
       size: 1181068
     - path: src/train_and_evaluate.py
-      md5: b132b1f551e913539b3406a90bf79e3f
-      size: 2731
+      md5: 58ed7515c4ec3fb28df072041bf9f7bf
+      size: 2748
     params:
       params.yaml:
-        algorithm_params.solver: lbfgs
-    outs:
-    - path: report/params.json
-      md5: 781f58cb383f63293a5da011d23cba4c
-      size: 25
-    - path: report/scores.json
-      md5: d06f2fa749e599a9fe2dd177f65e8ca6
-      size: 115
-    - path: saved_models/model.joblib
-      md5: 8c175995e9a59ccde713d37ee9f9957d
-      size: 1795
+        algorithm_params.solver: saga
+  log_production_model:
+    cmd: python src/log_production_model.py --config=params.yaml
+    deps:
+    - path: src/log_production_model.py
+      md5: ef0e5d9860cc376ba2460c27ca9ade3e
+      size: 1719
