@@ -77,3 +77,7 @@ mlflow server \
     --default-artifact-root ./artifacts \
     --host 0.0.0.0 -p 2345
 ```
+
+```bash
+Heroku Link: https://activity-recognistion-logr.herokuapp.com/
+```
