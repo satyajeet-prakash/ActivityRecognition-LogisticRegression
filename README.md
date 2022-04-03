@@ -66,3 +66,5 @@ overview = df.describe()
 overview.loc[["min", "max"]]
 overview.loc[["min", "max"]].to_json("schema_in.json")
 ```
+
+Heroku Link: https://activity-recognistion-logr.herokuapp.com/
