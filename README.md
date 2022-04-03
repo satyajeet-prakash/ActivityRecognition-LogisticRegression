@@ -78,6 +78,7 @@ mlflow server \
     --host 0.0.0.0 -p 2345
 ```
 
+Heroku Link: 
 ```bash
-Heroku Link: https://activity-recognistion-logr.herokuapp.com/
+https://activity-recognistion-logr.herokuapp.com/
 ```
